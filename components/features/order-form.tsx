@@ -76,7 +76,7 @@ const OrderForm = ({ setIsVisible }: { setIsVisible: Dispatch<SetStateAction<boo
       <div className="mb-6">
         <Input
           value={formData.username}
-          placeholder="Ваше ім'я*"
+          placeholder={"Ваше ім'я*"}
           onChange={(e) => setUserFormData((prev) => ({ ...prev, username: e.target.value }))}
         />
         <InputError errors={errors} inputKey="username" />

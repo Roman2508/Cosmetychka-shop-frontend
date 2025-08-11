@@ -57,7 +57,10 @@ const Search: FC<PropsWithChildren<Props>> = ({ children, searchLayoutVisible, s
           >
             {products ? (
               products.docs.map((product) => (
-                <div className="border border-background hover:border-border transition-all pl-0 hover:pl-4">
+                <div
+                  key={product.id}
+                  className="border border-background hover:border-border transition-all pl-0 hover:pl-4"
+                >
                   <Link
                     href={`/product/${product.id}`}
                     onClick={() => {
@@ -65,7 +68,7 @@ const Search: FC<PropsWithChildren<Props>> = ({ children, searchLayoutVisible, s
                       setSearchLayoutVisible(false)
                     }}
                   >
-                    <ProductMiniCard key={product.id} product={product as Product} />
+                    <ProductMiniCard product={product as Product} />
                   </Link>
                 </div>
               ))

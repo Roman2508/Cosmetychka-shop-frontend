@@ -33,7 +33,7 @@ const HeaderCatalog = () => {
         <PopoverContent className="flex w-[100vw] gap-4" align="start">
           <Accordion type="single" collapsible className="w-full" defaultValue="item-1">
             {(categories ? categories.docs : []).map((category) => (
-              <AccordionItem value={String(category.id)}>
+              <AccordionItem value={String(category.id)} key={category.id}>
                 <AccordionTrigger className="text-xl font-medium my-0 text-left text-primary">
                   {category.name}
                 </AccordionTrigger>

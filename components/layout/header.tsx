@@ -96,7 +96,7 @@ const Header = () => {
                 <b className="hidden md:block">inst_nickname</b>
               </div>
 
-              <p className="text-end hidden md:block">ми на зв'язку</p>
+              <p className="text-end hidden md:block">{"ми на зв'язку"}</p>
             </div>
 
             <div className="flex gap-2">
