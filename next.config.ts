@@ -2,11 +2,7 @@ import type { NextConfig } from "next"
 
 const nextConfig: NextConfig = {
   images: {
-    remotePatterns: [
-      new URL(`${process.env.NEXT_PUBLIC_API_URL}/**`),
-      new URL(`https://gtmcosmetics.com.ua/**`),
-      new URL(`https://google.com/**`),
-    ],
+    remotePatterns: [new URL(`${process.env.NEXT_PUBLIC_API_URL}/**`), new URL(`http://localhost:7777/**`)],
   },
   async rewrites() {
     return [
