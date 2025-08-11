@@ -13,7 +13,7 @@ import { useBreakpoints } from "@siberiacancode/reactuse"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 
 const HeaderCatalog = () => {
-  const { categories, isLoading } = useGetCategories()
+  const { categories } = useGetCategories()
 
   const { smallerOrEqual } = useBreakpoints({ sm: 640, md: 768 })
 

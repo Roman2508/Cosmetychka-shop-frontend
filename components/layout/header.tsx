@@ -89,8 +89,11 @@ const Header = () => {
           <div className="flex items-center justify-end gap-4 md:gap-10 flex-1">
             <div className="flex flex-col h-[24px] md:h-auto">
               <div className="flex gap-2 items-center mb-[-6px]">
-                <img
-                  src="https://gtmcosmetics.com.ua/image/catalog/chm-files/icon-contact/instagram.svg"
+                <Image
+                  width={24}
+                  height={24}
+                  alt="instagram logo"
+                  src="/instagram.svg"
                   className="min-w-[24px] min-h-[24px]"
                 />
                 <b className="hidden md:block">inst_nickname</b>

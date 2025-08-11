@@ -102,7 +102,9 @@ const OrderForm = ({ setIsVisible }: { setIsVisible: Dispatch<SetStateAction<boo
         <InputError errors={errors} inputKey="note" />
       </div>
 
-      <p className="mb-6 text-primary">Найближчим часом наш спеціаліст зв'яжеться з вами, щоб уточнити усі деталі.</p>
+      <p className="mb-6 text-primary">
+        {"Найближчим часом наш спеціаліст зв'яжеться з вами, щоб уточнити усі деталі."}
+      </p>
 
       <Button className="w-full" disabled={!!errors || createOrder.isPending || !cartItems.length}>
         {createOrder.isPending ? "Завантаження..." : "Оформити замовлення"}

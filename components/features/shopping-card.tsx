@@ -1,7 +1,7 @@
 "use client"
 
 import { Badge } from "@/components/ui/badge"
-import { FC, Fragment, PropsWithChildren, useState } from "react"
+import { FC, PropsWithChildren, useState } from "react"
 import { ShoppingBag as ShoppingBagIcon } from "lucide-react"
 
 import {
