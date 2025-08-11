@@ -73,7 +73,7 @@ export default function FullProductPage() {
                     <Image
                       width={100}
                       height={100}
-                      alt="Popular Product"
+                      alt="Product"
                       src={photo.image.url}
                       onClick={() => setCurrentPhotoIndex(index)}
                       className={cn(
@@ -94,7 +94,7 @@ export default function FullProductPage() {
                 <Image
                   width={1000}
                   height={1000}
-                  alt="Popular Product"
+                  alt="Product"
                   onClick={() => setOpenLightbox(true)}
                   src={product.photos[currentPhotoIndex].image.url || ""}
                   className="border cursor-pointer w-full h-full object-contain p-4"

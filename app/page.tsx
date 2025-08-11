@@ -4,7 +4,7 @@ import HomePage from "./HomePage"
 import { SITE_DESCRIPTION, SITE_NAME } from "@/constants/constants"
 
 // TODO:
-// 8. Зробити сторінку 404
+// 8. Зробити редірект на <Error />
 
 export const metadata: Metadata = {
   title: `Головна | ${SITE_NAME}`,

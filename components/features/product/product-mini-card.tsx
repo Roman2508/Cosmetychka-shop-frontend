@@ -39,7 +39,7 @@ export function ProductMiniCard({ product, variant = "saved" }: Props) {
         <Image
           width={80}
           height={80}
-          alt="Popular Product"
+          alt="Product"
           src={product.photos[0].image.url}
           className="border cursor-pointer w-full h-full object-contain p-2"
         />
