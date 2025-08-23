@@ -68,7 +68,7 @@ const Search: FC<PropsWithChildren<Props>> = ({ children, searchLayoutVisible, s
                       setSearchLayoutVisible(false)
                     }}
                   >
-                    <ProductMiniCard product={product as Product} />
+                    <ProductMiniCard product={product as Product} variant="search" />
                   </Link>
                 </div>
               ))

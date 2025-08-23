@@ -11,7 +11,7 @@ import { useActions } from "@/hooks/useActions"
 import { Product as ProductEntity } from "@/types/entities.types"
 
 interface Props {
-  variant?: "cart" | "saved"
+  variant?: "cart" | "saved" | "search"
   product: ProductEntity
 }
 
