@@ -176,14 +176,19 @@ const Header = () => {
                       <NavigationMenuContent
                         className={cn(
                           "header-categories-link absolute w-full min-h-50 z-[999] top-[-10px]",
-                          isLast ? "!left-[-100%] !right-0 !translate-x-0" : "",
-                          isFirst ? "!left-0 !right-0 !translate-x-0" : "",
+                          isLast ? "!left-[-200%] !right-0 !translate-x-0 min-w-50" : "",
+                          isFirst ? "!left-0 !right-0 !translate-x-0 min-w-50" : "",
                         )}
                       >
-                        <ul className={cn("grid gap-2 grid-cols-1 min-w-50")}>
+                        <ul className={cn("flex flex-col min-w-50")}>
                           {category.subcategories.map((subcategory) => (
-                            <NavigationMenuLink className="max-h-[30px]" key={subcategory.id}>
-                              <Link href={`/catalog/${subcategory.id}`}>{subcategory.name}</Link>
+                            <NavigationMenuLink
+                              key={subcategory.id}
+                              className="max-h-[30px] hover:text-destructive inline-flex mb-2"
+                            >
+                              <Link href={`/catalog/${subcategory.id}`} className="truncate min-h-8">
+                                {subcategory.name}
+                              </Link>
                             </NavigationMenuLink>
                           ))}
                         </ul>

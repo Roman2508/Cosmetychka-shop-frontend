@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import { useDebounceValue } from "@siberiacancode/reactuse"
 import { Dispatch, FC, PropsWithChildren, SetStateAction, useEffect, useRef, useState } from "react"
 
@@ -8,7 +9,6 @@ import { Input } from "../ui/input"
 import { Product } from "@/types/entities.types"
 import { ProductMiniCard } from "./product/product-mini-card"
 import { useSearchProducts } from "@/hooks/queries/products-queries"
-import Link from "next/link"
 
 interface Props {
   searchLayoutVisible: boolean
@@ -59,7 +59,7 @@ const Search: FC<PropsWithChildren<Props>> = ({ children, searchLayoutVisible, s
               products.docs.map((product) => (
                 <div
                   key={product.id}
-                  className="border border-background hover:border-border transition-all pl-0 hover:pl-4"
+                  className="border border-background hover:border-border transition-all pl-0 hover:pl-4 pt-2"
                 >
                   <Link
                     href={`/product/${product.id}`}

@@ -14,7 +14,7 @@ export default function CategoriesPage() {
       <div className="w-full my-15">
         <Title className="mt-0 mb-6 text-left normal-case font-semibold">Всі категорії</Title>
 
-        <div className="grid grid-cols-4 gap-10">
+        <div className="grid grid-cols-1 2xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-10">
           {(categories ? categories.docs : []).map((category) => {
             if (!category.subcategories.length) return
 
