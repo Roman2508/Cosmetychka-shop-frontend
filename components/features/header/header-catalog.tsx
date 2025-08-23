@@ -47,8 +47,14 @@ const HeaderCatalog = () => {
 
                   {category.subcategories.map((subcategory) => {
                     return (
-                      <div key={subcategory.id} className="mb-2 text-lg">
-                        <Link href={`/catalog/${subcategory.id}`} className="block hover:text-destructive">
+                      <div key={subcategory.id} className="mb-2 text-lg" onClick={() => setOpen(false)}>
+                        <Link
+                          href={`/catalog/${subcategory.id}`}
+                          className={cn(
+                            "block hover:text-destructive",
+                            params.id === String(subcategory.id) && "text-destructive",
+                          )}
+                        >
                           <h4>{subcategory.name}</h4>
                         </Link>
                       </div>
