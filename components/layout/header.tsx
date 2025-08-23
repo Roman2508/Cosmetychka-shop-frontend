@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/navigation-menu"
 import Link from "next/link"
 import Image from "next/image"
+import { useParams } from "next/navigation"
 import { useEffect, useRef, useState } from "react"
 import { ChevronLeft as ChevronLeftIcon, ChevronRight as ChevronRightIcon, Search as SearchIcon } from "lucide-react"
 
@@ -25,6 +26,8 @@ import { HeaderFovourite } from "../features/header/header-fovourite"
 import { useGetCategories } from "@/hooks/queries/categories-queries"
 
 const Header = () => {
+  const params = useParams()
+
   const { categories, isLoading } = useGetCategories()
 
   const scrollRef = useRef<HTMLDivElement>(null)
@@ -184,7 +187,10 @@ const Header = () => {
                           {category.subcategories.map((subcategory) => (
                             <NavigationMenuLink
                               key={subcategory.id}
-                              className="max-h-[30px] hover:text-destructive inline-flex mb-2"
+                              className={cn(
+                                "max-h-[30px] hover:text-destructive inline-flex mb-2",
+                                params.id === String(subcategory.id) && "text-destructive",
+                              )}
                             >
                               <Link href={`/catalog/${subcategory.id}`} className="truncate min-h-8">
                                 {subcategory.name}

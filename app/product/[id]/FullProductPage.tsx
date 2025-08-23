@@ -128,7 +128,7 @@ export default function FullProductPage() {
             {product ? <ProductStatus status={product.status} /> : <Skeleton className="w-[120px] h-[24px]" />}
 
             {product ? (
-              <Title className="mt-0 mb-1 xl:mb-2 text-left font-medium">{product.name}</Title>
+              <Title className="mt-0 mb-1 xl:mb-2 text-center lg:text-left font-medium">{product.name}</Title>
             ) : (
               <Skeleton className="w-[50%] h-[36px] my-1 xl:my-2" />
             )}

@@ -2,6 +2,8 @@
 
 import Link from "next/link"
 import { useState } from "react"
+import { useParams } from "next/navigation"
+import { useBreakpoints } from "@siberiacancode/reactuse"
 import { ChevronRight as ChevronRightIcon, Grip as GripIcon } from "lucide-react"
 
 import { cn } from "@/lib/utils"
@@ -9,19 +11,21 @@ import { Button } from "../../ui/button"
 import { Subcategory } from "@/types/entities.types"
 import { useGetCategories } from "@/hooks/queries/categories-queries"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import { useBreakpoints } from "@siberiacancode/reactuse"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 
 const HeaderCatalog = () => {
+  const params = useParams()
+
   const { categories } = useGetCategories()
 
   const { smallerOrEqual } = useBreakpoints({ sm: 640, md: 768 })
 
+  const [open, setOpen] = useState(false)
   const [subcategories, setSubcategories] = useState<Subcategory[]>([])
   const [activeCategoryId, setActiveCategoryId] = useState<number | null>(null)
 
   return (
-    <Popover>
+    <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger>
         <Button size="md" className="!px-4" variant={smallerOrEqual("sm") ? "ghost" : "default"}>
           <GripIcon className={smallerOrEqual("sm") ? "!w-[18px] !h-[18px] md:!w-[22px] md:!h-[22px]" : ""} />
@@ -44,11 +48,7 @@ const HeaderCatalog = () => {
                   {category.subcategories.map((subcategory) => {
                     return (
                       <div key={subcategory.id} className="mb-2 text-lg">
-                        <Link
-                          // onClick={() => setOpen(false)}
-                          href={`/catalog/${subcategory.id}`}
-                          className="block hover:text-destructive"
-                        >
+                        <Link href={`/catalog/${subcategory.id}`} className="block hover:text-destructive">
                           <h4>{subcategory.name}</h4>
                         </Link>
                       </div>
@@ -93,9 +93,12 @@ const HeaderCatalog = () => {
                 return (
                   <div key={subcategory.id} className="mb-2">
                     <Link
-                      // onClick={() => setOpen(false)}
+                      onClick={() => setOpen(false)}
                       href={`/catalog/${subcategory.id}`}
-                      className="block hover:text-destructive"
+                      className={cn(
+                        "block hover:text-destructive",
+                        params.id === String(subcategory.id) && "text-destructive",
+                      )}
                     >
                       <h4>{subcategory.name}</h4>
                     </Link>
