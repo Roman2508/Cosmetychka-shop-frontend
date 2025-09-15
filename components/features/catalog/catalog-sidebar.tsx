@@ -1,10 +1,11 @@
-import { FC, useMemo } from "react"
+import { FC, useEffect, useMemo, useState } from "react"
 import { CheckedState } from "@radix-ui/react-checkbox"
 
 import { cn } from "@/lib/utils"
 import { Checkbox } from "../../ui/checkbox"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { useDebounceValue } from "@siberiacancode/reactuse"
 import { useSetQueryString } from "@/hooks/useSetQueryString"
 import { useGetBrands } from "@/hooks/queries/brands-queries"
 import { useParseQueryString } from "@/hooks/useParseQuertString"
@@ -40,6 +41,32 @@ const CatalogSidebar: FC<Props> = ({ hidden = false, className = "" }) => {
     return Math.max(...products.docs.map((el) => el.price))
   }, [products])
 
+  const [priceRange, setPriceRange] = useState({
+    from: filter.price.from,
+    to: filter.price.to ? filter.price.to : maxPrice,
+  })
+
+  const debouncedPrice = useDebounceValue(priceRange, 500)
+
+  useEffect(() => {
+    if (filter.price.from !== debouncedPrice.from) {
+      setQueryString("price_from", String(priceRange.from))
+    }
+
+    if (filter.price.to !== debouncedPrice.to) {
+      if (priceRange.to !== maxPrice) {
+        setQueryString("price_to", String(priceRange.to))
+        // setQueryString("price_to", !priceRange.to ? String(priceRange.to) : maxPrice.toString())
+      }
+    }
+  }, [debouncedPrice])
+
+  useEffect(() => {
+    if (!filter.price.to && maxPrice > 0) {
+      setPriceRange((prev) => ({ ...prev, to: maxPrice }))
+    }
+  }, [maxPrice, filter.price.to])
+
   return (
     <div className={cn("min-w-[240px]", hidden ? "hidden" : "")}>
       <h3 className="text-2xl font-medium mt-0 mb-6 text-left font-mono">Фільтр товарів</h3>
@@ -53,17 +80,21 @@ const CatalogSidebar: FC<Props> = ({ hidden = false, className = "" }) => {
               <Input
                 min={0}
                 type="number"
-                value={filter.price.from}
                 className="w-30 h-[30px] focus-visible:h-[29px]"
-                onChange={(e) => setQueryString("price_from", e.target.value)}
+                value={priceRange.from}
+                onChange={(e) => setPriceRange((prev) => ({ ...prev, from: Number(e.target.value) }))}
+                // value={filter.price.from}
+                // onChange={(e) => setQueryString("price_from", e.target.value)}
               />
               <p className="text-sm">До</p>
               <Input
                 type="number"
                 max={maxPrice}
                 className="w-30 h-[30px] focus-visible:h-[29px]"
-                value={filter.price.to ? filter.price.to : maxPrice}
-                onChange={(e) => setQueryString("price_to", e.target.value)}
+                value={priceRange.to}
+                onChange={(e) => setPriceRange((prev) => ({ ...prev, to: Number(e.target.value) }))}
+                // value={filter.price.to ? filter.price.to : maxPrice}
+                // onChange={(e) => setQueryString("price_to", e.target.value)}
               />
             </div>
           </AccordionContent>
