@@ -10,10 +10,10 @@ export const productService = {
 
     // price
     if (filter.price.from) {
-      queryParams += `&[where][price][greater_than_equal]=${filter.price.from}`
+      queryParams += `&[where][finalPrice][greater_than_equal]=${filter.price.from}`
     }
     if (filter.price.to !== 0) {
-      queryParams += `&[where][price][less_than_equal]=${filter.price.to}`
+      queryParams += `&[where][finalPrice][less_than_equal]=${filter.price.to}`
     }
 
     // brand

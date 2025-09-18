@@ -8,20 +8,26 @@ import ProductsSlider from "@/components/features/products-slider"
 import { useProductsByTag } from "@/hooks/queries/products-queries"
 
 export default function HomePage() {
-  const { products: newProducts } = useProductsByTag("new")
-  const { products: topProducts } = useProductsByTag("top")
-  const { products: hitProducts } = useProductsByTag("hit")
+  const { products: newProducts, isLoading: isNewLoading } = useProductsByTag("new")
+  const { products: topProducts, isLoading: isTopLoading } = useProductsByTag("top")
+  const { products: hitProducts, isLoading: isHitLoading } = useProductsByTag("hit")
+
+  console.log("isNewLoading", isNewLoading)
 
   return (
     <div>
-      <div className="h-[calc(100vh-147px)] bg-cover bg-center" style={{ backgroundImage: "url(/banner.jpg)" }}>
+      <div
+        className="h-[calc(100vh-75px)] sm:h-[calc(100vh-147px)] bg-cover bg-center"
+        style={{ backgroundImage: "url(/banner.jpg)" }}
+      >
         <Container className="h-full">
           <div className="flex justify-center items-center md:items-end flex-col gap-4 min-h-full">
             <h1 className="text-4xl sm:text-5xl md:text-7xl font-mono font-bold">Kosmetychka shop</h1>
             <p className="text-sm sm:text-base text-center md:text-end w-full md:w-2/3 lg:w-1/2">
-              Цей текст є прикладом заповнення для демонстрації шрифтів, верстки та композиції сторінки. Його зміст не
-              має смислового навантаження і використовується виключно як макетний текст. Цей текст є прикладом
-              заповнення для демонстрації шрифтів, верстки та композиції сторінки.
+              Краса починається тут🌸 <br />
+              Kosmetychka shop— це більше, ніж магазин косметики. Це простір, де ви можете знайти все для своєї
+              унікальності: ніжний догляд, трендові новинки та улюблену класику. Ми допоможемо вам підкреслити природну
+              красу та відчути впевненість у собі.
             </p>
 
             <Link href="/catalog">
@@ -31,11 +37,17 @@ export default function HomePage() {
         </Container>
       </div>
 
-      <ProductsSlider title="Новинки" products={newProducts ? newProducts.docs : []} />
+      {newProducts && !!newProducts.docs.length && (
+        <ProductsSlider title="Новинки" products={newProducts ? newProducts.docs : []} />
+      )}
 
-      <ProductsSlider title="Популярне" products={topProducts ? topProducts.docs : []} />
+      {topProducts && !!topProducts.docs.length && (
+        <ProductsSlider title="Популярне" products={topProducts ? topProducts.docs : []} />
+      )}
 
-      <ProductsSlider title="Бестселери" products={hitProducts ? hitProducts.docs : []} />
+      {hitProducts && !!hitProducts.docs.length && (
+        <ProductsSlider title="Бестселери" products={hitProducts ? hitProducts.docs : []} />
+      )}
     </div>
   )
 }

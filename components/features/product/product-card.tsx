@@ -20,7 +20,7 @@ export function ProductCard({ product }: Props) {
             width={300}
             height={300}
             alt="Product"
-            src={product.photos[0].image.url}
+            src={product.photos[0]?.image.url}
             className="cursor-pointer min-w-full max-h-[240px] w-full h-full object-contain p-4"
           />
         </Link>

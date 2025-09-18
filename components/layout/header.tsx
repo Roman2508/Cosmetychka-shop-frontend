@@ -90,7 +90,11 @@ const Header = () => {
           </Search>
 
           <div className="flex items-center justify-end gap-4 md:gap-10 flex-1">
-            <div className="flex flex-col h-[24px] md:h-auto">
+            <a
+              target="_blank"
+              className="flex flex-col h-[24px] md:h-auto"
+              href="https://www.instagram.com/accounts/login/?next=%2F__kosmetychka_shop_%2F&source=omni_redirect"
+            >
               <div className="flex gap-2 items-center mb-[-6px]">
                 <Image
                   width={24}
@@ -99,11 +103,11 @@ const Header = () => {
                   src="/instagram.svg"
                   className="min-w-[24px] min-h-[24px]"
                 />
-                <b className="hidden md:block">inst_nickname</b>
+                <b className="hidden md:block">__kosmetychka_shop_</b>
               </div>
 
               <p className="text-end hidden md:block">{"ми на зв'язку"}</p>
-            </div>
+            </a>
 
             <div className="flex gap-2">
               <Search searchLayoutVisible={searchLayoutVisible} setSearchLayoutVisible={setSearchLayoutVisible}>

@@ -96,7 +96,7 @@ export default function FullProductPage() {
                   height={1000}
                   alt="Product"
                   onClick={() => setOpenLightbox(true)}
-                  src={product.photos[currentPhotoIndex].image.url || ""}
+                  src={product.photos[currentPhotoIndex]?.image.url || ""}
                   className="border cursor-pointer w-full h-full object-contain p-4"
                 />
 
