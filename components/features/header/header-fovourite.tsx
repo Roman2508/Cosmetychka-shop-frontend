@@ -28,7 +28,7 @@ export function HeaderFovourite() {
           {favouriteItems.length ? (
             favouriteItems.map((product) => <ProductMiniCard key={product.id} product={product} />)
           ) : (
-            <div>Тут ще немає жодного товару!</div>
+            <div>У вас немає товарів в закладках!</div>
           )}
         </div>
       </SheetContent>

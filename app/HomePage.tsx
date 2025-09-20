@@ -8,16 +8,14 @@ import ProductsSlider from "@/components/features/products-slider"
 import { useProductsByTag } from "@/hooks/queries/products-queries"
 
 export default function HomePage() {
-  const { products: newProducts, isLoading: isNewLoading } = useProductsByTag("new")
-  const { products: topProducts, isLoading: isTopLoading } = useProductsByTag("top")
-  const { products: hitProducts, isLoading: isHitLoading } = useProductsByTag("hit")
-
-  console.log("isNewLoading", isNewLoading)
+  const { products: newProducts } = useProductsByTag("new")
+  const { products: topProducts } = useProductsByTag("top")
+  const { products: hitProducts } = useProductsByTag("hit")
 
   return (
     <div>
       <div
-        className="h-[calc(100vh-75px)] sm:h-[calc(100vh-147px)] bg-cover bg-center"
+        className="h-[calc(100svh-74px)] sm:h-[calc(100vh-145px)] bg-cover bg-center"
         style={{ backgroundImage: "url(/banner.jpg)" }}
       >
         <Container className="h-full">
