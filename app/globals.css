@@ -195,15 +195,15 @@ main {
 }
 
 .product-description a {
-  @apply text-blue-600
+  @apply text-blue-600;
 }
 
 .product-description ul {
-  @apply mb-2 list-[square];
+  @apply mb-2 ml-[18px] list-[square];
 }
 
 .product-description ol {
-  @apply mb-2 list-decimal;
+  @apply mb-2 ml-[18px] list-decimal;
 }
 
 .product-description blockquote {
@@ -213,4 +213,3 @@ main {
 .product-description hr {
   @apply mb-2;
 }
-
