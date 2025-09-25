@@ -165,3 +165,52 @@ main {
 .header-categories:has(.header-categories-link:hover) {
   @apply min-h-[calc(100vh-160px)] overflow-y-visible;
 }
+
+.product-description h1 {
+  @apply mb-2 font-bold text-3xl;
+}
+
+.product-description h2 {
+  @apply mb-2 font-bold text-2xl;
+}
+
+.product-description h3 {
+  @apply mb-2 font-bold text-xl;
+}
+
+.product-description h4 {
+  @apply mb-2 font-bold text-lg;
+}
+
+.product-description h5 {
+  @apply mb-2 font-bold;
+}
+
+.product-description h6 {
+  @apply mb-2 font-bold text-sm;
+}
+
+.product-description p {
+  @apply mb-2;
+}
+
+.product-description a {
+  @apply text-blue-600
+}
+
+.product-description ul {
+  @apply mb-2 list-[square];
+}
+
+.product-description ol {
+  @apply mb-2 list-decimal;
+}
+
+.product-description blockquote {
+  @apply mb-2 pl-4 border-l-[2px] border-destructive italic;
+}
+
+.product-description hr {
+  @apply mb-2;
+}
+

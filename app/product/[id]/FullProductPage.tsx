@@ -9,6 +9,7 @@ import Lightbox from "yet-another-react-lightbox"
 import Zoom from "yet-another-react-lightbox/plugins/zoom"
 import "yet-another-react-lightbox/plugins/thumbnails.css"
 import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails"
+import { convertLexicalToHTML } from "@payloadcms/richtext-lexical/html"
 
 import Error from "@/app/error"
 import { cn } from "@/lib/utils"
@@ -147,8 +148,12 @@ export default function FullProductPage() {
               <Skeleton className="w-[100px] h-[32px] mb-4" />
             )}
 
+            {/* <p className="font-light text-justify lg:text-left">{convertLexicalToHTML({ data:  })}</p> */}
             {product ? (
-              <p className="font-light text-justify lg:text-left">{product?.description}</p>
+              <div
+                className="product-description"
+                dangerouslySetInnerHTML={{ __html: convertLexicalToHTML({ data: product.description as any }) }}
+              />
             ) : (
               <div>
                 <Skeleton className="w-[50vw] lg:w-[40vw] h-[24px] mb-1" />
