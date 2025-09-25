@@ -148,11 +148,10 @@ export default function FullProductPage() {
               <Skeleton className="w-[100px] h-[32px] mb-4" />
             )}
 
-            {/* <p className="font-light text-justify lg:text-left">{convertLexicalToHTML({ data:  })}</p> */}
             {product ? (
               <div
                 className="product-description"
-                dangerouslySetInnerHTML={{ __html: convertLexicalToHTML({ data: product.description as any }) }}
+                dangerouslySetInnerHTML={{ __html: convertLexicalToHTML({ data: product.description }) }}
               />
             ) : (
               <div>

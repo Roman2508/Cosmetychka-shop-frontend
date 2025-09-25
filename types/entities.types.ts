@@ -1,11 +1,15 @@
+import type { SerializedEditorState, SerializedLexicalNode } from "lexical"
+
 export type ProductGender = "man" | "woman" | "both"
 export type ProductStatus = "in_stock" | "coming_soon" | "out_of_stock" | "discontinued"
 export type ProductTags = "hit" | "new" | "top"
 
+type RichText = SerializedEditorState<SerializedLexicalNode>
+
 export interface Product {
   id: number
   name: string
-  description: string
+  description: RichText
   price: number
   subcategories: Subcategory
   brand: Brand
