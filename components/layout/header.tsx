@@ -183,7 +183,8 @@ const Header = () => {
                       <NavigationMenuContent
                         className={cn(
                           "header-categories-link absolute w-full min-h-50 z-[999] top-[-10px]",
-                          isLast ? "!left-[-200%] !right-0 !translate-x-0 min-w-50" : "",
+                          isLast ? "!left-[-100%] !right-0 !translate-x-0 min-w-50 max-w-[300px]" : "",
+                          // isLast ? "!left-[-200%] !right-0 !translate-x-0 min-w-50" : "",
                           isFirst ? "!left-0 !right-0 !translate-x-0 min-w-50" : "",
                         )}
                       >

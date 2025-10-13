@@ -46,7 +46,7 @@ export const productService = {
   },
 
   async getOne(id: string) {
-    const { data } = await axiosInstance.get<Product>(`/products/${id}`)
+    const { data } = await axiosInstance.get<Product>(`/products/${id}/full`)
     return data
   },
 

@@ -1,5 +1,8 @@
+"use client"
+
 import Link from "next/link"
 import Image from "next/image"
+import { useState } from "react"
 
 import ProductTag from "./product-tag"
 import ProductPrice from "./product-price"
@@ -12,15 +15,19 @@ interface Props {
 }
 
 export function ProductCard({ product }: Props) {
+  const [imgSrc, setImgSrc] = useState(product.photos[0]?.image.url)
+
   return (
     <div className="mx-auto flex flex-col items-center w-full">
       <div className="relative w-full min-h-[240px] max-h-[240px] border">
         <Link href={`/product/${product.id}`}>
           <Image
+            unoptimized
             width={300}
             height={300}
-            alt="Product"
-            src={product.photos[0]?.image.url}
+            src={imgSrc}
+            alt="product"
+            onError={() => setImgSrc("")}
             className="cursor-pointer min-w-full max-h-[240px] w-full h-full object-contain p-4"
           />
         </Link>

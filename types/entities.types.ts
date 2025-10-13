@@ -15,13 +15,24 @@ export interface Product {
   brand: Brand
   gender: ProductGender
   status: ProductStatus
-  hasDiscount: boolean
   tags: ProductTags[]
+
+  hasDiscount: boolean
   discount?: { type: "fixed" | "percent"; value: number }
+
+  hasVariations: boolean
+  variantInfo?: ProductVariation
+
   specs: { key: string; value: string; id?: string | null }[]
   photos: { id: string; image: Media; caption?: string | null }[]
   updatedAt: string
   createdAt: string
+}
+
+export interface ProductVariation {
+  variantName: string
+  color: string
+  relatedProducts: Product[]
 }
 
 export interface Subcategory {

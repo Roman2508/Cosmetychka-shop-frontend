@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import Image from "next/image"
 import { useState } from "react"
 import { AxiosError } from "axios"
@@ -146,6 +147,43 @@ export default function FullProductPage() {
               </div>
             ) : (
               <Skeleton className="w-[100px] h-[32px] mb-4" />
+            )}
+
+            {product && product.hasVariations && (
+              <div className="">
+                <h5 className="font-light text-xl mb-1 xl:mb-4">Варіанти товару:</h5>
+                <div className="flex gap-2 flex-wrap">
+                  <div className="flex items-center flex-col gap-2 mb-2">
+                    <div className="border-2 border-primary rounded-full">
+                      <div
+                        title={product.variantInfo?.variantName}
+                        className="w-[38px] h-[38px] rounded-full border-2 border-white"
+                        style={{ background: product.variantInfo?.color }}
+                      ></div>
+                    </div>
+                    <span className="max-w-16 truncate" title={product.variantInfo?.variantName}>
+                      {product.variantInfo?.variantName}
+                    </span>
+                  </div>
+
+                  {product.variantInfo?.relatedProducts.map((p) => (
+                    <Link
+                      className="flex items-center justify-center flex-col gap-2 mb-2 cursor-pointer"
+                      key={p.id}
+                      href={`/product/${p.id}`}
+                    >
+                      <div
+                        title={p.variantInfo?.variantName}
+                        className="w-[40px] h-[40px] rounded-full"
+                        style={{ background: p.variantInfo?.color }}
+                      ></div>
+                      <span className="max-w-16 truncate" title={p.variantInfo?.variantName}>
+                        {p.variantInfo?.variantName}
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
             )}
 
             {product ? (
