@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://cosmetychka.com.ua
+
+# Sitemaps
+Sitemap: https://cosmetychka.com.ua/sitemap.xml
