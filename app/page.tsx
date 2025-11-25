@@ -6,6 +6,9 @@ import { SITE_DESCRIPTION, SITE_NAME } from "@/constants/constants"
 export const metadata: Metadata = {
   title: `Головна | ${SITE_NAME}`,
   description: SITE_DESCRIPTION,
+  alternates: {
+    canonical: "https://cosmetychka.com.ua/",
+  },
 }
 
 export default function Home() {
