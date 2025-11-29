@@ -7,6 +7,8 @@ import { BASE_KEY_WORDS, SITE_DESCRIPTION, SITE_NAME } from "@/constants/constan
 // import { prefetchCategoryPage } from "@/hooks/queries/prefetch-category-query"
 // import { dehydrate, HydrationBoundary } from "@tanstack/react-query"
 
+const baseUrl = process.env.NEXT_PUBLIC_FRONTEND_URL || "https://cosmetychka.com.ua"
+
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const { id } = await params
   const category = await categoriesService.getById(id)
@@ -16,9 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
       title: `Категорію не знайдено | ${SITE_NAME}`,
       description: "Спробуйте змінити фільтри або вибрати іншу категорію",
       alternates: {
-        canonical: process.env.NEXT_PUBLIC_FRONTEND_URL
-          ? `${process.env.NEXT_PUBLIC_FRONTEND_URL}/catalog/${id}`
-          : `https://cosmetychka.com.ua/catalog/${id}`,
+        canonical: `${baseUrl}/catalog/${id}`,
       },
     }
   }
@@ -27,25 +27,36 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
     title: `${category.name} | ${SITE_NAME}`,
     description: SITE_DESCRIPTION,
     keywords: [category.name, ...BASE_KEY_WORDS],
+
     openGraph: {
       title: `${category.name} | ${SITE_NAME}`,
       description: SITE_DESCRIPTION,
-      url: process.env.NEXT_PUBLIC_FRONTEND_URL
-        ? new URL(process.env.NEXT_PUBLIC_FRONTEND_URL)
-        : new URL("https://cosmetychka.com.ua"),
-      images: [{ url: favicon.src }],
-      siteName: process.env.NEXT_PUBLIC_FRONTEND_URL
-        ? process.env.NEXT_PUBLIC_FRONTEND_URL
-        : "https://cosmetychka.com.ua",
+      url: new URL(`${baseUrl}/catalog/${category.id}`),
+      images: [
+        {
+          url: `${baseUrl}/web-app-manifest-512x512.png`,
+          width: 512,
+          height: 512,
+          alt: "Cosmetychka – професійна косметика",
+        },
+      ],
+      siteName: `${baseUrl}/catalog/${category.id}`,
       locale: "uk_UA",
       type: "website",
     },
+
     twitter: {
       card: "summary_large_image",
       title: `${category.name} | ${SITE_NAME}`,
       description: SITE_DESCRIPTION,
-      images: [favicon.src],
+      images: [`${baseUrl}/web-app-manifest-512x512.png`],
     },
+
+    icons: {
+      icon: "/web-app-manifest-192x192.png",
+      apple: "/apple-touch-icon.png",
+    },
+
     robots: {
       index: true,
       follow: true,
@@ -60,9 +71,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
     },
 
     alternates: {
-      canonical: process.env.NEXT_PUBLIC_FRONTEND_URL
-        ? `${process.env.NEXT_PUBLIC_FRONTEND_URL}/catalog/${category.id}`
-        : `https://cosmetychka.com.ua/catalog/${category.id}`,
+      canonical: `${baseUrl}/catalog/${category.id}`,
     },
   }
 }

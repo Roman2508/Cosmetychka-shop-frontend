@@ -1,7 +1,6 @@
 import { Metadata } from "next"
 
 import HomePage from "./HomePage"
-// import favicon from "@/public/c_logo.png"
 import { KEY_WORDS, SITE_DESCRIPTION, SITE_NAME } from "@/constants/constants"
 
 const baseUrl = process.env.NEXT_PUBLIC_FRONTEND_URL || "https://cosmetychka.com.ua"
@@ -10,12 +9,11 @@ export const metadata: Metadata = {
   title: `Головна | ${SITE_NAME}`,
   description: SITE_DESCRIPTION,
   keywords: KEY_WORDS,
-  
+
   openGraph: {
     title: `Головна | ${SITE_NAME}`,
     description: SITE_DESCRIPTION,
     url: new URL(baseUrl),
-    // images: [{ url: favicon.src }],
     images: [
       {
         url: `${baseUrl}/web-app-manifest-512x512.png`,
@@ -34,7 +32,6 @@ export const metadata: Metadata = {
     title: `Головна | ${SITE_NAME}`,
     description: SITE_DESCRIPTION,
     images: [`${baseUrl}/web-app-manifest-192x192.png`],
-    // images: [favicon.src],
   },
 
   icons: {

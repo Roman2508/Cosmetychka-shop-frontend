@@ -1,12 +1,13 @@
 import { Metadata } from "next"
 import { HydrationBoundary } from "@tanstack/react-query"
 
-import favicon from "@/public/c_logo.png"
 import FullProductPage from "./FullProductPage"
 import { productService } from "@/api/producs-service"
 import { BASE_KEY_WORDS, SITE_NAME } from "@/constants/constants"
 import { createCEODescription } from "@/helpers/create-ceo-description"
 import { prefetchProductPage } from "@/hooks/queries/prefetch-product-query"
+
+const baseUrl = process.env.NEXT_PUBLIC_FRONTEND_URL || "https://cosmetychka.com.ua"
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const { id } = await params
@@ -16,11 +17,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
     return {
       title: `Товар не знайдено | ${SITE_NAME}`,
       description: "Спробуйте змінити фільтри або вибрати іншу категорію",
-      alternates: {
-        canonical: process.env.NEXT_PUBLIC_FRONTEND_URL
-          ? `${process.env.NEXT_PUBLIC_FRONTEND_URL}/product/${id}`
-          : `https://cosmetychka.com.ua/product/${id}`,
-      },
+      alternates: { canonical: `${baseUrl}/product/${id}` },
     }
   }
 
@@ -30,25 +27,36 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
     title: `${product.name} | ${SITE_NAME}`,
     description: DESCRIPTION,
     keywords: [product.name, ...BASE_KEY_WORDS],
+
     openGraph: {
       title: `${product.name} | ${SITE_NAME}`,
       description: DESCRIPTION,
-      url: process.env.NEXT_PUBLIC_FRONTEND_URL
-        ? new URL(process.env.NEXT_PUBLIC_FRONTEND_URL)
-        : new URL("https://cosmetychka.com.ua"),
-      images: [{ url: favicon.src }],
-      siteName: process.env.NEXT_PUBLIC_FRONTEND_URL
-        ? process.env.NEXT_PUBLIC_FRONTEND_URL
-        : "https://cosmetychka.com.ua",
+      url: new URL(`${baseUrl}/product/${product.id}`),
+      images: [
+        {
+          url: `${baseUrl}/web-app-manifest-512x512.png`,
+          width: 512,
+          height: 512,
+          alt: "Cosmetychka – професійна косметика",
+        },
+      ],
+      siteName: `${baseUrl}/product/${product.id}`,
       locale: "uk_UA",
       type: "website",
     },
+
     twitter: {
       card: "summary_large_image",
       title: `${product.name} | ${SITE_NAME}`,
       description: DESCRIPTION,
-      images: [favicon.src],
+      images: [`${baseUrl}/web-app-manifest-512x512.png`],
     },
+
+    icons: {
+      icon: "/web-app-manifest-192x192.png",
+      apple: "/apple-touch-icon.png",
+    },
+
     robots: {
       index: true,
       follow: true,
@@ -63,9 +71,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
     },
 
     alternates: {
-      canonical: process.env.NEXT_PUBLIC_FRONTEND_URL
-        ? `${process.env.NEXT_PUBLIC_FRONTEND_URL}/product/${product.id}`
-        : `https://cosmetychka.com.ua/product/${product.id}`,
+      canonical: `${baseUrl}/product/${product.id}`,
     },
   }
 }

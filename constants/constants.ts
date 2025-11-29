@@ -18,6 +18,7 @@ export const BASE_KEY_WORDS = [
   "косметика онлайн",
   "косметичка ком",
   "косметичка ком юа",
+  "cosmetychka",
   "cosmetychka com",
   "cosmetychka com ua",
 ]

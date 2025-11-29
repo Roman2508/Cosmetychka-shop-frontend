@@ -1,10 +1,11 @@
 import { Metadata } from "next"
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query"
 
-import favicon from "@/public/c_logo.png"
 import CategoriesPage from "./CategoriesPage"
 import { KEY_WORDS, SITE_DESCRIPTION, SITE_NAME } from "@/constants/constants"
 import { prefetchCategories } from "@/hooks/queries/prefetch-categories-query"
+
+const baseUrl = process.env.NEXT_PUBLIC_FRONTEND_URL || "https://cosmetychka.com.ua"
 
 export const metadata: Metadata = {
   title: `Категорії товарів | ${SITE_NAME}`,
@@ -13,13 +14,16 @@ export const metadata: Metadata = {
   openGraph: {
     title: `Категорії товарів | ${SITE_NAME}`,
     description: SITE_DESCRIPTION,
-    url: process.env.NEXT_PUBLIC_FRONTEND_URL
-      ? new URL(process.env.NEXT_PUBLIC_FRONTEND_URL)
-      : new URL("https://cosmetychka.com.ua"),
-    images: [{ url: favicon.src }],
-    siteName: process.env.NEXT_PUBLIC_FRONTEND_URL
-      ? process.env.NEXT_PUBLIC_FRONTEND_URL
-      : "https://cosmetychka.com.ua",
+    url: new URL(`${baseUrl}/catalog`),
+    images: [
+      {
+        url: `${baseUrl}/web-app-manifest-512x512.png`,
+        width: 512,
+        height: 512,
+        alt: "Cosmetychka – професійна косметика",
+      },
+    ],
+    siteName: `${baseUrl}/catalog`,
     locale: "uk_UA",
     type: "website",
   },
@@ -27,8 +31,14 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `Категорії товарів | ${SITE_NAME}`,
     description: SITE_DESCRIPTION,
-    images: [favicon.src],
+    images: [`${baseUrl}/web-app-manifest-512x512.png`],
   },
+
+  icons: {
+    icon: "/web-app-manifest-192x192.png",
+    apple: "/apple-touch-icon.png",
+  },
+
   robots: {
     index: true,
     follow: true,
@@ -42,9 +52,7 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: process.env.NEXT_PUBLIC_FRONTEND_URL
-      ? `${process.env.NEXT_PUBLIC_FRONTEND_URL}/catalog`
-      : "https://cosmetychka.com.ua/catalog",
+    canonical: `${baseUrl}/catalog`,
   },
 }
 
