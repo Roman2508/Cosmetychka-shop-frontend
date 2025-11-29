@@ -38,13 +38,17 @@ export const useGetOneProduct = () => {
 }
 
 export const useSearchProducts = (search: string) => {
-  const { data: products, isLoading } = useQuery({
+  const {
+    data: products,
+    isLoading,
+    isError,
+  } = useQuery({
     enabled: !!search,
     queryKey: ["products", { search: search }],
     queryFn: () => productService.search(search),
   })
 
-  return useMemo(() => ({ products, isLoading }), [products, isLoading])
+  return useMemo(() => ({ products, isLoading, isError }), [products, isLoading, isError])
 }
 
 export const useProductsByTag = (tag: ProductTags) => {

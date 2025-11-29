@@ -5,6 +5,8 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       new URL(`${process.env.NEXT_PUBLIC_API_URL}/**`),
       new URL(`${process.env.NEXT_PUBLIC_CLOUDFLARE_BUCKET_URL}/**`),
+      new URL(`https://minio.cosmetychka.com.ua/**`),
+      new URL(`http://minio.cosmetychka.com.ua:9000/**`),
       new URL(`http://localhost:7777/**`),
     ],
   },

@@ -1,6 +1,6 @@
 "use client"
 
-import Link from "next/link"
+// import Link from "next/link"
 import { useDebounceValue } from "@siberiacancode/reactuse"
 import { Dispatch, FC, PropsWithChildren, SetStateAction, useEffect, useRef, useState } from "react"
 
@@ -22,7 +22,7 @@ const Search: FC<PropsWithChildren<Props>> = ({ children, searchLayoutVisible, s
 
   const debouncedValue = useDebounceValue(search, 500)
 
-  const { products, isLoading } = useSearchProducts(debouncedValue)
+  const { products, isLoading, isError } = useSearchProducts(debouncedValue)
 
   useEffect(() => {
     if (searchLayoutVisible && inputRef.current) inputRef.current.focus()
@@ -61,19 +61,21 @@ const Search: FC<PropsWithChildren<Props>> = ({ children, searchLayoutVisible, s
                   key={product.id}
                   className="border border-background hover:border-border transition-all pl-0 hover:pl-4 pt-2"
                 >
-                  <Link
-                    href={`/product/${product.id}`}
+                  <div // <Link>
+                    // href={`/product/${product.id}`}
                     onClick={() => {
                       setSearch("")
                       setSearchLayoutVisible(false)
                     }}
                   >
                     <ProductMiniCard product={product as Product} variant="search" />
-                  </Link>
+                  </div>
                 </div>
               ))
             ) : (
-              <p className="py-10 text-center">{isLoading ? "Завантаження..." : "Введіть текст для пошуку"}</p>
+              <p className="py-10 text-center">
+                {isError ? "Помилка" : isLoading ? "Завантаження..." : "Введіть текст для пошуку"}
+              </p>
             )}
           </div>
         </div>

@@ -18,6 +18,7 @@ import { useCart } from "@/hooks/useCart"
 import Title from "@/components/features/title"
 import { Button } from "@/components/ui/button"
 import { useActions } from "@/hooks/useActions"
+import SkeletonImage from "@/public/skeleton.jpg"
 import { Skeleton } from "@/components/ui/skeleton"
 import Container from "@/components/layout/container"
 import ShoppingCard from "@/components/features/shopping-card"
@@ -27,6 +28,8 @@ import ProductPrice from "@/components/features/product/product-price"
 import ProductStatus from "@/components/features/product/product-status"
 import AddToFavouriteIcon from "@/components/features/add-to-favourite-icon"
 import { useGetOneProduct, useProductsByCategory } from "@/hooks/queries/products-queries"
+import { createCEODescription } from "@/helpers/create-ceo-description"
+import { calcDiscount } from "@/helpers/calc-price-discount"
 
 export default function FullProductPage() {
   const { product, error } = useGetOneProduct()
@@ -64,8 +67,55 @@ export default function FullProductPage() {
     return <Error />
   }
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: product ? `${product.name}` : "Товар не знайдено",
+    description: product ? createCEODescription(product.name, product.description, product.price) : "Товар не знайдено",
+    brand: product
+      ? {
+          "@type": "Brand",
+          name: product.brand.name,
+        }
+      : undefined,
+    category: product ? product.subcategories.name : undefined,
+    offers: product
+      ? {
+          "@type": "Offer",
+          price: product.hasDiscount ? calcDiscount(product.price, product.discount) : product.price,
+          priceCurrency: "UAH",
+          availability: "https://schema.org/" + (product.status === "in_stock" ? "InStock" : "OutOfStock"),
+        }
+      : undefined,
+    seller: {
+      "@type": "Organization",
+      name: "Cosmetychka.com.ua",
+    },
+    aggregateRating: product
+      ? {
+          "@type": "AggregateRating",
+          ratingValue: 5,
+          reviewCount: 5,
+          bestRating: 5,
+          worstRating: 1,
+        }
+      : undefined,
+    additionalProperty: product
+      ? product.specs.map((spec) => ({
+          "@type": "PropertyValue",
+          name: spec.key,
+          value: spec.value,
+        }))
+      : undefined,
+    url: process.env.NEXT_PUBLIC_FRONTEND_URL
+      ? `${process.env.NEXT_PUBLIC_FRONTEND_URL}/catalog/${product?.id}`
+      : `https://cosmetychka.com.ua/catalog/${product?.id}`,
+  }
+
   return (
     <Container>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
+
       <div className="flex flex-col lg:flex-row items-center lg:items-start gap-5 xl:gap-10 my-15">
         <div className="flex flex-col-reverse sm:flex-row gap-2 items-center sm:items-start lg:gap-4 w-full justify-center">
           <div className="flex flex-row sm:flex-col gap-2 sm:gap-4 max-w-[90vw] sm:w-[80px] xl:w-[100px] max-h-[400px] xl:max-h-[520px] overflow-auto">
@@ -76,8 +126,12 @@ export default function FullProductPage() {
                       width={100}
                       height={100}
                       alt="Product"
-                      src={photo.image.url}
+                      src={photo.image.url || SkeletonImage.src}
                       onClick={() => setCurrentPhotoIndex(index)}
+                      onError={(e) => {
+                        ;(e.target as HTMLImageElement).src = SkeletonImage.src
+                        ;(e.target as HTMLImageElement).srcset = SkeletonImage.src
+                      }}
                       className={cn(
                         index === currentPhotoIndex ? "border-primary" : "",
                         "border cursor-pointer min-w-[80px] sm:min-w-full w-[80px] sm:w-full h-[80px] xl:h-[100px] object-contain p-2",
@@ -97,9 +151,13 @@ export default function FullProductPage() {
                   width={1000}
                   height={1000}
                   alt="Product"
+                  onError={(e) => {
+                    ;(e.target as HTMLImageElement).src = SkeletonImage.src
+                    ;(e.target as HTMLImageElement).srcset = SkeletonImage.src
+                  }}
                   onClick={() => setOpenLightbox(true)}
-                  src={product.photos[currentPhotoIndex]?.image.url || ""}
                   className="border cursor-pointer w-full h-full object-contain p-4"
+                  src={product.photos[currentPhotoIndex]?.image.url || SkeletonImage.src}
                 />
 
                 <div className="absolute right-2 top-2 flex flex-col gap-1">

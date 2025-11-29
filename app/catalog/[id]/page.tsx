@@ -1,13 +1,91 @@
 import { Metadata } from "next"
 
 import CatalogPage from "./CatalogPage"
-import { SITE_DESCRIPTION, SITE_NAME } from "@/constants/constants"
+import favicon from "@/public/c_logo.png"
+import { categoriesService } from "@/api/categories-service"
+import { BASE_KEY_WORDS, SITE_DESCRIPTION, SITE_NAME } from "@/constants/constants"
+// import { prefetchCategoryPage } from "@/hooks/queries/prefetch-category-query"
+// import { dehydrate, HydrationBoundary } from "@tanstack/react-query"
 
-export const metadata: Metadata = {
-  title: `Каталог | ${SITE_NAME}`,
-  description: SITE_DESCRIPTION,
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const { id } = await params
+  const category = await categoriesService.getById(id)
+
+  if (!category) {
+    return {
+      title: `Категорію не знайдено | ${SITE_NAME}`,
+      description: "Спробуйте змінити фільтри або вибрати іншу категорію",
+      alternates: {
+        canonical: process.env.NEXT_PUBLIC_FRONTEND_URL
+          ? `${process.env.NEXT_PUBLIC_FRONTEND_URL}/catalog/${id}`
+          : `https://cosmetychka.com.ua/catalog/${id}`,
+      },
+    }
+  }
+
+  return {
+    title: `${category.name} | ${SITE_NAME}`,
+    description: SITE_DESCRIPTION,
+    keywords: [category.name, ...BASE_KEY_WORDS],
+    openGraph: {
+      title: `${category.name} | ${SITE_NAME}`,
+      description: SITE_DESCRIPTION,
+      url: process.env.NEXT_PUBLIC_FRONTEND_URL
+        ? new URL(process.env.NEXT_PUBLIC_FRONTEND_URL)
+        : new URL("https://cosmetychka.com.ua"),
+      images: [{ url: favicon.src }],
+      siteName: process.env.NEXT_PUBLIC_FRONTEND_URL
+        ? process.env.NEXT_PUBLIC_FRONTEND_URL
+        : "https://cosmetychka.com.ua",
+      locale: "uk_UA",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${category.name} | ${SITE_NAME}`,
+      description: SITE_DESCRIPTION,
+      images: [favicon.src],
+    },
+    robots: {
+      index: true,
+      follow: true,
+      nocache: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
+
+    alternates: {
+      canonical: process.env.NEXT_PUBLIC_FRONTEND_URL
+        ? `${process.env.NEXT_PUBLIC_FRONTEND_URL}/catalog/${category.id}`
+        : `https://cosmetychka.com.ua/catalog/${category.id}`,
+    },
+  }
 }
 
-export default function Catalog() {
+// export default async function Catalog({
+//   params,
+//   searchParams,
+// }: {
+//   params: Promise<{ id: string }>
+//   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+// }) {
+//   const resolvedParams = await params
+//   const resolvedSearchParams = await searchParams
+
+//   const queryClient = await prefetchCategoryPage(resolvedParams, resolvedSearchParams)
+
+//   return (
+//     <HydrationBoundary state={dehydrate(queryClient)}>
+//       <CatalogPage />
+//     </HydrationBoundary>
+//   )
+// }
+
+export default async function Catalog() {
   return <CatalogPage />
 }

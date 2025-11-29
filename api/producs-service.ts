@@ -39,7 +39,8 @@ export const productService = {
   async search(payload: string) {
     let queryParams = ""
     if (payload) {
-      queryParams += `&[where][or][0][name][contains]=${payload}&[where][or][1][description][contains]=${payload}`
+      queryParams += `&[where][or][0][name][contains]=${payload}`
+      // queryParams += `&[where][or][0][name][contains]=${payload}&[where][or][1][description][contains]=${payload}`
     }
     const { data } = await axiosInstance.get<BaseResponseType<Product[]>>(`/products?${queryParams}`)
     return data

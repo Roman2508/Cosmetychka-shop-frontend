@@ -10,7 +10,6 @@ import {
   DialogHeader,
   DialogContent,
   DialogTrigger,
-  DialogDescription,
 } from "@/components/ui/dialog"
 import OrderForm from "./order-form"
 import { Button } from "../ui/button"
@@ -31,7 +30,7 @@ const ShoppingCard: FC<PropsWithChildren<Props>> = ({ type = "button", buttonTex
 
   return (
     <Dialog onOpenChange={setIsVisible} open={isVisible}>
-      <DialogTrigger>
+      <DialogTrigger asChild>
         {type === "button" ? (
           <Button onClick={() => onClick && onClick()} className="w-full">
             {buttonText}
@@ -56,7 +55,7 @@ const ShoppingCard: FC<PropsWithChildren<Props>> = ({ type = "button", buttonTex
           </DialogTitle>
         </DialogHeader>
 
-        <DialogDescription className="max-h-[80vh] overflow-y-auto px-4">
+        <div className="max-h-[80vh] overflow-y-auto px-4">
           {cartItems.length ? (
             <div>
               <Accordion type="single" collapsible className="w-full" defaultValue="item-1">
@@ -83,7 +82,7 @@ const ShoppingCard: FC<PropsWithChildren<Props>> = ({ type = "button", buttonTex
           <hr className="pb-4" />
 
           <OrderForm setIsVisible={setIsVisible} />
-        </DialogDescription>
+        </div>
       </DialogContent>
     </Dialog>
   )

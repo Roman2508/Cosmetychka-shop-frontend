@@ -6,6 +6,7 @@ import Title from "@/components/features/title"
 import Container from "@/components/layout/container"
 import { useGetCategories } from "@/hooks/queries/categories-queries"
 
+
 export default function CategoriesPage() {
   const { categories } = useGetCategories()
 

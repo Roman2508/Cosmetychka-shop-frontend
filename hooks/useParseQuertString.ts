@@ -3,7 +3,7 @@
 import { z } from "zod"
 import { useSearchParams } from "next/navigation"
 
-const querySchema = z.object({
+export const querySchema = z.object({
   sort_type: z.string().default("id"),
   price_from: z.coerce.number().default(0),
   price_to: z.coerce.number().default(0),

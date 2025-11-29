@@ -26,7 +26,7 @@ const HeaderCatalog = () => {
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger>
+      <PopoverTrigger asChild>
         <Button size="md" className="!px-4" variant={smallerOrEqual("sm") ? "ghost" : "default"}>
           <GripIcon className={smallerOrEqual("sm") ? "!w-[18px] !h-[18px] md:!w-[22px] md:!h-[22px]" : ""} />
           <span className="hidden sm:inline-block">Каталог</span>

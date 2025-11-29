@@ -8,6 +8,7 @@ import { Button } from "../../ui/button"
 import { useCart } from "@/hooks/useCart"
 import ProductPrice from "./product-price"
 import { useActions } from "@/hooks/useActions"
+import SkeletonImage from "@/public/skeleton.jpg"
 import { Product as ProductEntity } from "@/types/entities.types"
 
 interface Props {
@@ -40,7 +41,11 @@ export function ProductMiniCard({ product, variant = "saved" }: Props) {
           width={80}
           height={80}
           alt="Product"
-          src={product.photos[0]?.image.url}
+          src={product.photos[0]?.image.url || SkeletonImage.src}
+          onError={(e) => {
+            const target = e.target as HTMLImageElement
+            target.src = SkeletonImage.src
+          }}
           className="border cursor-pointer w-full h-full object-contain p-2"
         />
       </Link>

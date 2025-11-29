@@ -1,13 +1,48 @@
 import { Metadata } from "next"
 
 import HomePage from "./HomePage"
-import { SITE_DESCRIPTION, SITE_NAME } from "@/constants/constants"
+import favicon from "@/public/c_logo.png"
+import { KEY_WORDS, SITE_DESCRIPTION, SITE_NAME } from "@/constants/constants"
 
 export const metadata: Metadata = {
   title: `Головна | ${SITE_NAME}`,
   description: SITE_DESCRIPTION,
+  keywords: KEY_WORDS,
+  openGraph: {
+    title: `Головна | ${SITE_NAME}`,
+    description: SITE_DESCRIPTION,
+    url: process.env.NEXT_PUBLIC_FRONTEND_URL
+      ? new URL(process.env.NEXT_PUBLIC_FRONTEND_URL)
+      : new URL("https://cosmetychka.com.ua"),
+    images: [{ url: favicon.src }],
+    siteName: process.env.NEXT_PUBLIC_FRONTEND_URL
+      ? process.env.NEXT_PUBLIC_FRONTEND_URL
+      : "https://cosmetychka.com.ua",
+    locale: "uk_UA",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `Головна | ${SITE_NAME}`,
+    description: SITE_DESCRIPTION,
+    images: [favicon.src],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    nocache: false,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   alternates: {
-    canonical: "https://cosmetychka.com.ua/",
+    canonical: process.env.NEXT_PUBLIC_FRONTEND_URL
+      ? process.env.NEXT_PUBLIC_FRONTEND_URL
+      : "https://cosmetychka.com.ua",
   },
 }
 

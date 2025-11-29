@@ -7,6 +7,7 @@ import { useState } from "react"
 import ProductTag from "./product-tag"
 import ProductPrice from "./product-price"
 import AddToCartIcon from "../add-to-cart-icon"
+import SkeletonImage from "@/public/skeleton.jpg"
 import AddToFavouriteIcon from "../add-to-favourite-icon"
 import { Product as ProductEntity } from "@/types/entities.types"
 
@@ -25,9 +26,9 @@ export function ProductCard({ product }: Props) {
             unoptimized
             width={300}
             height={300}
-            src={imgSrc}
+            src={imgSrc || SkeletonImage.src}
             alt="product"
-            onError={() => setImgSrc("")}
+            onError={() => setImgSrc(SkeletonImage.src)}
             className="cursor-pointer min-w-full max-h-[240px] w-full h-full object-contain p-4"
           />
         </Link>

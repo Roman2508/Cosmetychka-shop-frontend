@@ -4,7 +4,7 @@ export type ProductGender = "man" | "woman" | "both"
 export type ProductStatus = "in_stock" | "coming_soon" | "out_of_stock" | "discontinued"
 export type ProductTags = "hit" | "new" | "top"
 
-type RichText = SerializedEditorState<SerializedLexicalNode>
+export type RichText = SerializedEditorState<SerializedLexicalNode>
 
 export interface Product {
   id: number

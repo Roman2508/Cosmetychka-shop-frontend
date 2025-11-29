@@ -5,6 +5,7 @@ import { useBreakpoints } from "@siberiacancode/reactuse"
 
 import Title from "@/components/features/title"
 import Container from "@/components/layout/container"
+import { SITE_DESCRIPTION } from "@/constants/constants"
 import { useGetProducts } from "@/hooks/queries/products-queries"
 import { MobileFilters } from "@/components/features/mobile-filters"
 import { useGetCategories } from "@/hooks/queries/categories-queries"
@@ -26,8 +27,21 @@ export default function CatalogPage() {
     .flatMap((el) => el.subcategories)
     .find((el) => el.id === +id)?.name
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: currentCategoryName ? `Товари категорії: ${currentCategoryName}` : "Всі товари",
+    description: "Перегляньте наш широкий вибір товарів у цій категорії. " + SITE_DESCRIPTION,
+    url: process.env.NEXT_PUBLIC_FRONTEND_URL
+      ? `${process.env.NEXT_PUBLIC_FRONTEND_URL}/catalog/${id}`
+      : `https://cosmetychka.com.ua/catalog/${id}`,
+    numberOfItems: products ? products.docs.length : 0,
+  }
+
   return (
     <Container>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
+
       <div className="flex gap-10 mt-15 mb-20">
         <CatalogSidebar hidden={smallerOrEqual("lg")} />
 
