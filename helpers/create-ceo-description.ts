@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { RichText } from "@/types/entities.types"
 
 const BASE_STRING = "грн. Купити на Cosmetychka.com.ua. Товар в наявності. Рейтинг: 5/5"

@@ -1,5 +1,5 @@
 import { Metadata } from "next"
-import { dehydrate, HydrationBoundary } from "@tanstack/react-query"
+import { HydrationBoundary } from "@tanstack/react-query"
 
 import favicon from "@/public/c_logo.png"
 import FullProductPage from "./FullProductPage"

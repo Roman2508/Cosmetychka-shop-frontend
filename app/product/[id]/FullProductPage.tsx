@@ -21,15 +21,15 @@ import { useActions } from "@/hooks/useActions"
 import SkeletonImage from "@/public/skeleton.jpg"
 import { Skeleton } from "@/components/ui/skeleton"
 import Container from "@/components/layout/container"
+import { calcDiscount } from "@/helpers/calc-price-discount"
 import ShoppingCard from "@/components/features/shopping-card"
 import ProductTag from "@/components/features/product/product-tag"
 import ProductsSlider from "@/components/features/products-slider"
 import ProductPrice from "@/components/features/product/product-price"
+import { createCEODescription } from "@/helpers/create-ceo-description"
 import ProductStatus from "@/components/features/product/product-status"
 import AddToFavouriteIcon from "@/components/features/add-to-favourite-icon"
 import { useGetOneProduct, useProductsByCategory } from "@/hooks/queries/products-queries"
-import { createCEODescription } from "@/helpers/create-ceo-description"
-import { calcDiscount } from "@/helpers/calc-price-discount"
 
 export default function FullProductPage() {
   const { product, error } = useGetOneProduct()
