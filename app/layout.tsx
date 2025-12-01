@@ -26,6 +26,18 @@ export default async function RootLayout({
 }>) {
   const queryClient = await prefetchCategories()
 
+  const baseUrl = process.env.FRONTEND_URL || "https://cosmetychka.com.ua"
+
+  const organizationData = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Cosmetychka shop",
+    alternateName: ["Косметичка шоп", "cosmetychka com", "Косметичка ком", "cosmetychka com ua", "Косметичка ком юа"],
+    url: baseUrl,
+    logo: `${baseUrl}/web-app-manifest-512x512.png`,
+    sameAs: ["https://www.instagram.com/__kosmetychka_shop_"],
+  }
+
   return (
     <html lang="uk">
       <head>
@@ -33,6 +45,11 @@ export default async function RootLayout({
         <link rel="icon" href="/favicon-32x32.png" type="image/png" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/site.webmanifest" />
+
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationData) }} />
+
+        <link rel="icon" type="image/png" sizes="512x512" href="/web-app-manifest-512x512.png" />
+        <link rel="apple-touch-icon" sizes="512x512" href="/apple-touch-icon.png" />
       </head>
 
       <body

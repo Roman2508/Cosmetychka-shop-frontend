@@ -1,7 +1,6 @@
 import { Metadata } from "next"
 
 import CatalogPage from "./CatalogPage"
-import favicon from "@/public/c_logo.png"
 import { categoriesService } from "@/api/categories-service"
 import { BASE_KEY_WORDS, SITE_DESCRIPTION, SITE_NAME } from "@/constants/constants"
 // import { prefetchCategoryPage } from "@/hooks/queries/prefetch-category-query"

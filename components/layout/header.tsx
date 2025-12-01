@@ -51,7 +51,8 @@ const Header = () => {
             <a
               target="_blank"
               className="flex flex-col h-[24px] md:h-auto"
-              href="https://www.instagram.com/accounts/login/?next=%2F__kosmetychka_shop_%2F&source=omni_redirect"
+              href="https://www.instagram.com/__kosmetychka_shop_"
+              // href="https://www.instagram.com/accounts/login/?next=%2F__kosmetychka_shop_%2F&source=omni_redirect"
             >
               <div className="flex gap-2 items-center mb-[-6px]">
                 <Image
