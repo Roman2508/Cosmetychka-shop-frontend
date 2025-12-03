@@ -67,9 +67,11 @@ export default function FullProductPage() {
     return <Error />
   }
 
+  const baseUrl = process.env.NEXT_PUBLIC_FRONTEND_URL || "https://cosmetychka.com.ua"
+
   const structuredData = {
     "@context": "https://schema.org",
-    "@type": "CollectionPage",
+    "@type": "Product",
     name: product ? `${product.name}` : "Товар не знайдено",
     description: product ? createCEODescription(product.name, product.description, product.price) : "Товар не знайдено",
     brand: product
@@ -79,18 +81,19 @@ export default function FullProductPage() {
         }
       : undefined,
     category: product ? product.subcategories.name : undefined,
+    image: product ? [`${baseUrl}/${product.photos[0].image.url}`] : undefined,
     offers: product
       ? {
           "@type": "Offer",
           price: product.hasDiscount ? calcDiscount(product.price, product.discount) : product.price,
           priceCurrency: "UAH",
           availability: "https://schema.org/" + (product.status === "in_stock" ? "InStock" : "OutOfStock"),
+          seller: {
+            "@type": "Organization",
+            name: "Cosmetychka.com.ua",
+          },
         }
       : undefined,
-    seller: {
-      "@type": "Organization",
-      name: "Cosmetychka.com.ua",
-    },
     aggregateRating: product
       ? {
           "@type": "AggregateRating",
@@ -107,9 +110,7 @@ export default function FullProductPage() {
           value: spec.value,
         }))
       : undefined,
-    url: process.env.NEXT_PUBLIC_FRONTEND_URL
-      ? `${process.env.NEXT_PUBLIC_FRONTEND_URL}/catalog/${product?.id}`
-      : `https://cosmetychka.com.ua/catalog/${product?.id}`,
+    url: `${baseUrl}/catalog/${product?.id}`,
   }
 
   return (
