@@ -53,8 +53,11 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
 
     icons: {
       icon: "/web-app-manifest-192x192.png",
+      shortcut: "/favicon.ico",
       apple: "/apple-touch-icon.png",
     },
+
+    manifest: "/site.webmanifest",
 
     robots: {
       index: true,
