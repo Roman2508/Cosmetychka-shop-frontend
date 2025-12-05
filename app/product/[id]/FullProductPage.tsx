@@ -67,6 +67,8 @@ export default function FullProductPage() {
     return <Error />
   }
 
+  const priceValidUntil = new Date(new Date().setFullYear(new Date().getFullYear() + 1)).toISOString().split("T")[0]
+
   const baseUrl = process.env.NEXT_PUBLIC_FRONTEND_URL || "https://cosmetychka.com.ua"
 
   const structuredData = {
@@ -91,6 +93,69 @@ export default function FullProductPage() {
           seller: {
             "@type": "Organization",
             name: "Cosmetychka.com.ua",
+          },
+          priceValidUntil: priceValidUntil,
+          shippingDetails: [
+            {
+              "@type": "OfferShippingDetails",
+              name: "Доставка Укрпоштою по Україні",
+              shippingRate: {
+                "@type": "MonetaryAmount",
+                value: "40",
+                currency: "UAH",
+              },
+              shippingDestination: {
+                "@type": "DefinedRegion",
+                addressCountry: "UA",
+              },
+              deliveryTime: {
+                "@type": "ShippingDeliveryTime",
+                handlingTime: {
+                  "@type": "QuantitativeValue",
+                  minValue: 0,
+                  maxValue: 1,
+                  unitCode: "DAY",
+                },
+                transitTime: {
+                  "@type": "QuantitativeValue",
+                  minValue: 2,
+                  maxValue: 5,
+                  unitCode: "DAY",
+                },
+              },
+            },
+            {
+              "@type": "OfferShippingDetails",
+              name: "Доставка Новою Поштою по Україні",
+              shippingRate: {
+                "@type": "MonetaryAmount",
+                value: "79",
+                currency: "UAH",
+              },
+              shippingDestination: {
+                "@type": "DefinedRegion",
+                addressCountry: "UA",
+              },
+              deliveryTime: {
+                "@type": "ShippingDeliveryTime",
+                handlingTime: {
+                  "@type": "QuantitativeValue",
+                  minValue: 0,
+                  maxValue: 1,
+                  unitCode: "DAY",
+                },
+                transitTime: {
+                  "@type": "QuantitativeValue",
+                  minValue: 1,
+                  maxValue: 3,
+                  unitCode: "DAY",
+                },
+              },
+            },
+          ],
+          hasMerchantReturnPolicy: {
+            "@type": "MerchantReturnPolicy",
+            returnPolicyCategory: "http://schema.org/NonReturnable",
           },
         }
       : undefined,
