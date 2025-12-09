@@ -92,7 +92,7 @@ export default function ProductStructuredData({ product }: { product?: Product }
           ],
           hasMerchantReturnPolicy: {
             "@type": "MerchantReturnPolicy",
-            returnPolicyCategory: "https://schema.org/NonReturnable",
+            returnPolicyCategory: "https://schema.org/MerchantReturnNotPermitted",
             applicableCountry: { "@type": "Country", name: "UA" },
           },
         }
