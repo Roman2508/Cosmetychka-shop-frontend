@@ -9,6 +9,7 @@ import { Toaster } from "@/components/ui/sonner"
 import { Providers } from "@/components/layout/providers"
 import ProgressBar from "@/components/features/progress-bar"
 import { prefetchCategories } from "@/hooks/queries/prefetch-categories-query"
+import { SITE_NAME } from "@/constants/constants"
 
 const jostSans = Jost({
   variable: "--font-jost-mono",
@@ -32,7 +33,7 @@ export default async function RootLayout({
   const organizationData = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "Cosmetychka shop",
+    name: SITE_NAME,
     alternateName: ["Косметичка шоп", "cosmetychka com", "Косметичка ком", "cosmetychka com ua", "Косметичка ком юа"],
     url: baseUrl,
     logo: `${baseUrl}/web-app-manifest-512x512.png`,
