@@ -6,6 +6,7 @@ import { productService } from "@/api/producs-service"
 import { BASE_KEY_WORDS, SITE_NAME } from "@/constants/constants"
 import { createCEODescription } from "@/helpers/create-ceo-description"
 import { prefetchProductPage } from "@/hooks/queries/prefetch-product-query"
+import ProductStructuredData from "@/components/features/product/product-structured-data"
 
 const baseUrl = process.env.NEXT_PUBLIC_FRONTEND_URL || "https://cosmetychka.com.ua"
 
@@ -49,7 +50,8 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
       card: "summary_large_image",
       title: `${product.name} | ${SITE_NAME}`,
       description: DESCRIPTION,
-      images: [`${baseUrl}/web-app-manifest-512x512.png`],
+      // images: [`${baseUrl}/web-app-manifest-512x512.png`],
+      images: product.photos.map((p) => `${baseUrl}/${p.image.url}`),
     },
 
     icons: {
@@ -83,8 +85,11 @@ export default async function FullProduct({ params }: { params: Promise<{ id: st
   const resolvedParams = await params
   const queryClient = await prefetchProductPage(resolvedParams)
 
+  const product = await productService.getOne(resolvedParams.id)
+
   return (
     <HydrationBoundary state={queryClient}>
+      <ProductStructuredData product={product} />
       <FullProductPage />
     </HydrationBoundary>
   )

@@ -78,6 +78,10 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   }
 }
 
+export default async function Catalog() {
+  return <CatalogPage />
+}
+
 // export default async function Catalog({
 //   params,
 //   searchParams,
@@ -96,7 +100,3 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
 //     </HydrationBoundary>
 //   )
 // }
-
-export default async function Catalog() {
-  return <CatalogPage />
-}
