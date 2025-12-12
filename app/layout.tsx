@@ -1,4 +1,5 @@
 import Head from "next/head"
+import { Metadata } from "next"
 import { Jost, Cormorant_Garamond } from "next/font/google"
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query"
 
@@ -20,6 +21,20 @@ const CormorantGaramondMono = Cormorant_Garamond({
   variable: "--font-cormorant-garamond-mono",
   subsets: ["latin", "cyrillic"],
 })
+
+export const metadata: Metadata = {
+  icons: {
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/favicon-16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-48.png", sizes: "48x48", type: "image/png" },
+      { url: "/favicon-96.png", sizes: "96x96", type: "image/png" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+    shortcut: [{ url: "/favicon.ico" }],
+  },
+}
 
 export default async function RootLayout({
   children,
@@ -43,9 +58,10 @@ export default async function RootLayout({
   return (
     <html lang="uk">
       <Head>
-        <link rel="icon" href="/favicon.ico" sizes="32x32 48x48" />
+        {/* <link rel="icon" href="/favicon.ico" /> */}
         {/* <link rel="icon" href="/favicon-32x32.png" type="image/png" /> */}
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        {/* <link rel="apple-touch-icon" href="/apple-touch-icon.png" /> */}
+
         <link rel="manifest" href="/site.webmanifest" />
 
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationData) }} />
