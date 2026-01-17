@@ -28,7 +28,6 @@ import ProductsSlider from "@/components/features/products-slider"
 import ProductPrice from "@/components/features/product/product-price"
 import { createCEODescription } from "@/helpers/create-ceo-description"
 import ProductStatus from "@/components/features/product/product-status"
-import { convertLexicalToHTML } from "@/helpers/convert-lexical-to-HTML"
 import AddToFavouriteIcon from "@/components/features/add-to-favourite-icon"
 import { useGetOneProduct, useProductsByCategory } from "@/hooks/queries/products-queries"
 
