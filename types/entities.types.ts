@@ -10,6 +10,7 @@ export interface Product {
   id: number
   name: string
   description: RichText
+  descriptionHtml: RichText
   price: number
   subcategories: Subcategory
   brand: Brand

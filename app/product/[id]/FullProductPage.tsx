@@ -178,7 +178,7 @@ export default function FullProductPage() {
   //     : undefined,
   //   url: `${baseUrl}/product/${product?.id}`,
   // }
-console.log('product', product?.description)
+
   return (
     <Container>
       {/* <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} /> */}
@@ -314,7 +314,7 @@ console.log('product', product?.description)
             {product ? (
               <div
                 className="product-description"
-                dangerouslySetInnerHTML={{ __html: product.description }}
+                dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
                 // dangerouslySetInnerHTML={{ __html: convertLexicalToHTML({ data: product.description }) }}
               />
             ) : (
