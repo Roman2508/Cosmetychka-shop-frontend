@@ -10,7 +10,7 @@ import Lightbox from "yet-another-react-lightbox"
 import Zoom from "yet-another-react-lightbox/plugins/zoom"
 import "yet-another-react-lightbox/plugins/thumbnails.css"
 import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails"
-import { convertLexicalToHTML } from "@payloadcms/richtext-lexical/html"
+// import { convertLexicalToHTML } from "@payloadcms/richtext-lexical/html"
 
 import Error from "@/app/error"
 import { cn } from "@/lib/utils"
@@ -30,6 +30,7 @@ import { createCEODescription } from "@/helpers/create-ceo-description"
 import ProductStatus from "@/components/features/product/product-status"
 import AddToFavouriteIcon from "@/components/features/add-to-favourite-icon"
 import { useGetOneProduct, useProductsByCategory } from "@/hooks/queries/products-queries"
+import { convertLexicalToHTML } from "@/helpers/convert-lexical-to-HTML"
 
 export default function FullProductPage() {
   const { product, error } = useGetOneProduct()
