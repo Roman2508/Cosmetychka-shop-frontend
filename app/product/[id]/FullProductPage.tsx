@@ -28,9 +28,9 @@ import ProductsSlider from "@/components/features/products-slider"
 import ProductPrice from "@/components/features/product/product-price"
 import { createCEODescription } from "@/helpers/create-ceo-description"
 import ProductStatus from "@/components/features/product/product-status"
+import { convertLexicalToHTML } from "@/helpers/convert-lexical-to-HTML"
 import AddToFavouriteIcon from "@/components/features/add-to-favourite-icon"
 import { useGetOneProduct, useProductsByCategory } from "@/hooks/queries/products-queries"
-import { convertLexicalToHTML } from "@/helpers/convert-lexical-to-HTML"
 
 export default function FullProductPage() {
   const { product, error } = useGetOneProduct()
@@ -179,7 +179,7 @@ export default function FullProductPage() {
   //     : undefined,
   //   url: `${baseUrl}/product/${product?.id}`,
   // }
-
+console.log('product', product?.description)
   return (
     <Container>
       {/* <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} /> */}
@@ -315,7 +315,8 @@ export default function FullProductPage() {
             {product ? (
               <div
                 className="product-description"
-                dangerouslySetInnerHTML={{ __html: convertLexicalToHTML({ data: product.description }) }}
+                dangerouslySetInnerHTML={{ __html: product.description }}
+                // dangerouslySetInnerHTML={{ __html: convertLexicalToHTML({ data: product.description }) }}
               />
             ) : (
               <div>
